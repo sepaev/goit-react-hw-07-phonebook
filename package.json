@@ -1,5 +1,5 @@
 {
-  "name": "goit-react-hw-06-phonebook",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://sepaev.github.io/goit-react-hw-07-phonebook",
@@ -19,16 +19,15 @@
     "react-dom": "^17.0.2",
     "react-input-mask": "^3.0.0-alpha.2",
     "react-redux": "^7.2.5",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^4.0.3",
     "redux": "^4.1.1",
-    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build  --public-url /goit-react-hw-07-phonebook",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },

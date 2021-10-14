@@ -1,8 +1,3 @@
-import types from '../types';
+import { createAction } from '@reduxjs/toolkit';
 
-export const makeSearch = e => {
-  return {
-    type: types.CHANGE_FILTER,
-    payload: e.target.value.trim().toLowerCase(),
-  };
-};
+export const makeSearch = createAction('filter/changeFilter', e => e.target.value.trim().toLowerCase());

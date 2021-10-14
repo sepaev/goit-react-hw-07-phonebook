@@ -1,25 +1,21 @@
-import types from '../types';
+import { createAction } from '@reduxjs/toolkit';
 let nameRef;
 let numberRef;
 
-export const addNewContactToState = e => {
+export const addNewContactToState = createAction('newContact/create', e => {
   e.preventDefault();
   nameRef = e.target.children[0].children[1];
   numberRef = e.target.children[1].children[1];
-  const inputName = nameRef.value.trim();
-  const inputNumber = numberRef.value;
 
   return {
-    type: types.ADD_NEW_CONTACT,
-    payload: { newName: inputName, newNumber: inputNumber },
+    payload: { newName: nameRef.value.trim(), newNumber: numberRef.value },
   };
-};
+});
 
-export const clearNewContactState = () => {
+export const clearNewContactState = createAction('newContact/clear', () => {
   if (nameRef) nameRef.value = '';
   if (numberRef) numberRef.value = '';
   return {
-    type: types.REMOVE_NEW_CONTACT,
     payload: { newName: '', newNumber: '' },
   };
-};
+});
