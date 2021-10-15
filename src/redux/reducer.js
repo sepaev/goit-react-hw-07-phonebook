@@ -1,6 +1,7 @@
-import types from './types';
 import { createReducer } from '@reduxjs/toolkit';
 import { addContact, deleteContact } from './actions/contacts_actions';
+import { makeSearch } from './actions/filter_actions';
+import { addNewContactToState, clearNewContactState } from './actions/newContacts_actions';
 const localContacts = JSON.parse(window.localStorage.getItem('contacts'));
 
 export const contactsReducer = createReducer(localContacts ? localContacts : [], {
@@ -15,24 +16,12 @@ export const contactsReducer = createReducer(localContacts ? localContacts : [],
   },
 });
 
-export const filterReducer = (state = '', { type, payload }) => {
-  switch (type) {
-    case types.CHANGE_FILTER:
-      return payload;
-    default:
-      return state;
-  }
-};
+export const filterReducer = createReducer('', { [makeSearch.type]: (state, { payload }) => payload });
 
-export const newContactReducer = (state = { newName: '', newNumber: '' }, { type, payload }) => {
-  switch (type) {
-    case types.ADD_NEW_CONTACT:
-      return payload;
-    case types.REMOVE_NEW_CONTACT:
-      return payload;
-    case types.CHECK_NEW_CONTACT:
-      return payload;
-    default:
-      return state;
-  }
-};
+export const newContactReducer = createReducer(
+  { newName: '', newNumber: '' },
+  {
+    [addNewContactToState.type]: (_, { payload }) => payload,
+    [clearNewContactState.type]: (_, { payload }) => payload,
+  },
+);
