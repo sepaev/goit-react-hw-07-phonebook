@@ -9,10 +9,12 @@ export const SearchInput = styled.input`
   margin-bottom: 20px;
   font-size: 22px;
   outline: unset;
+  height: 26px;
   &:focus,
   &:hover {
     filter: drop-shadow(0px 0px 5px lightblue);
     border: 1px solid lightblue;
+    height: 28px;
   }
 `;
 
