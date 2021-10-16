@@ -1,13 +1,13 @@
 import { FormButton, FormLabel, PhonebookForm } from './Form.styled';
-import PropTypes from 'prop-types';
 import InputMask from 'react-input-mask';
 import { addNewContactToState } from '../../redux/actions/newContacts_actions.js';
-import { connect } from 'react-redux';
 import css from './Form.module.css';
+import { useDispatch } from 'react-redux';
 
-function Form({ onSubmit }) {
+function Form() {
+  const dispatch = useDispatch();
   return (
-    <PhonebookForm onSubmit={onSubmit}>
+    <PhonebookForm onSubmit={e => dispatch(addNewContactToState(e))}>
       <FormLabel>
         <span>Name</span>
         <InputMask
@@ -40,13 +40,4 @@ function Form({ onSubmit }) {
     </PhonebookForm>
   );
 }
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: e => dispatch(addNewContactToState(e)),
-});
-
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;
