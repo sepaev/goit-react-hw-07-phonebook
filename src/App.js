@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Section from './components/Section';
 import { Notify } from 'notiflix';
@@ -6,10 +6,15 @@ import { addContact } from './redux/actions/contacts_actions.js';
 import { clearNewContactState } from './redux/actions/newContacts_actions';
 import checkNewContactInState from './redux/functions/checkNewContactInState';
 import { useEffect } from 'react';
+import { getContactsFromServer } from './redux/operations/contactsOperations';
 
 Notify.init({ position: 'center-top' });
 
 function App({ contacts, newContact, clearNewContact, addContact }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getContactsFromServer());
+  }, []);
   useEffect(() => {
     if (newContact.name !== '' && checkNewContactInState(newContact, contacts)) {
       addContact(newContact);

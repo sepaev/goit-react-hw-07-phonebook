@@ -1,6 +1,6 @@
 import { configureStore, combineReducers, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { filterReducer, contactsReducer, newContactReducer } from './reducer';
+import { filterReducer, contactsReducer, newContactReducer, isLoading, entities, error } from './reducer';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -23,6 +23,7 @@ const rootReducer = combineReducers({
   contacts: contactsReducer,
   filter: filterReducer,
   newContact: newContactReducer,
+  api: combineReducers({ isLoading, entities, error }),
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
