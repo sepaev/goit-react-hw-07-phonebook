@@ -1,27 +1,16 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Notify } from 'notiflix';
 
-export const addContact = createAction('contacts/create', ({ newName, newNumber }) => {
-  return {
-    payload: {
-      id: Date.now().toString(),
-      name: newName,
-      number: newNumber,
-    },
-  };
-});
+// import { postContact } from '../../services/contactsAPI';
 
-export const deleteContact = createAction('contacts/delete', (id, contacts) => {
-  const contact = contacts.find(contact => contact.id === id);
-  if (!contacts.find(contact => contact.id === id)) {
-    Notify.failure('Oh, no! Nothing was deleted.');
-    return;
-  }
-  Notify.info(`Contact ${contact.name} was removed successfully`);
-  return {
-    payload: id,
-  };
-});
+// export const deleteContact = createAction('contacts/delete', (id, contacts) => {
+//   const contact = contacts.find(contact => contact.id === id);
+//   if (!contact) {
+//     return;
+//   }
+//   return {
+//     payload: id,
+//   };
+// });
 //pending
 export const fetchContactsRequest = createAction('contacts/fetchContactsRequest');
 //fullfield

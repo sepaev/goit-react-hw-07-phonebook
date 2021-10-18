@@ -2,14 +2,14 @@ import { Fragment } from 'react';
 import Notification from '../Notification';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeSearch } from '../../redux/actions/filter_actions';
-import { deleteContact } from '../../redux/actions/contacts_actions';
-import useFilter from '../../redux/functions/useFilter';
+import { removeContact } from '../../redux/operations/contactsOperations';
+import useFilter from '../../redux/operations/useFilter';
 import { ContactsItem, ContactsList, DeleteButton, NumberSpan, SearchInput } from './Contacts.styled';
-import { getContacts, getFilter } from '../../redux/selectors';
+import { getContactsSelector, getFilterSelector } from '../../redux/selectors';
 
 function Contacts() {
-  const contacts = useSelector(state => getContacts(state));
-  const filter = useSelector(state => getFilter(state));
+  const contacts = useSelector(getContactsSelector);
+  const filter = useSelector(getFilterSelector);
   const filterdContacts = useFilter(contacts, filter);
   const message = contacts.length ? 'No contacts found.' : 'You have no contacts yet.';
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function Contacts() {
               {'☎ ' + name + ': '}
               <NumberSpan>
                 {number}
-                <DeleteButton id={id} onClick={() => dispatch(deleteContact(id, contacts))}>
+                <DeleteButton id={id} onClick={() => dispatch(removeContact({ id, name }))}>
                   X
                 </DeleteButton>
               </NumberSpan>

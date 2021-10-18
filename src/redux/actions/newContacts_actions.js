@@ -12,7 +12,7 @@ export const addNewContactToState = createAction('newContact/create', e => {
   };
 });
 
-export const clearNewContactState = createAction('newContact/clear', () => {
+export const clearNewContact = createAction('newContact/clear', () => {
   if (nameRef) nameRef.value = '';
   if (numberRef) numberRef.value = '';
   return {

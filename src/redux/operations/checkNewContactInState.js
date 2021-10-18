@@ -1,5 +1,5 @@
 import { Notify } from 'notiflix';
-import doClearNumber from './doClearNumber';
+import doClearNumber from '../operations/doClearNumber';
 ///////////////////////
 const checkNewContactInState = (newContact, contacts) => {
   const check = checkNewContact(newContact, contacts);
