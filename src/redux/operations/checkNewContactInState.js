@@ -4,7 +4,7 @@ import doClearNumber from '../operations/doClearNumber';
 const checkNewContactInState = (newContact, contacts) => {
   const check = checkNewContact(newContact, contacts);
   if (check.result) {
-    Notify.success(check.message);
+    // Notify.success(check.message);
     return true;
   } else {
     if (check.message) Notify.failure(check.message);

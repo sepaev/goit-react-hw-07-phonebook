@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-// import PropTypes from 'prop-types';
 import Section from './components/Section';
 import { Notify } from 'notiflix';
-// import { addContact } from './redux/actions/contacts_actions.js';
 import { clearNewContact } from './redux/actions/newContacts_actions';
 import checkNewContactInState from './redux/operations/checkNewContactInState';
 import { useEffect } from 'react';
@@ -13,18 +11,21 @@ Notify.init({ position: 'center-top' });
 
 function App() {
   const newContact = useSelector(getNewContactSelector);
-  const contacts = useSelector(getContactsSelector);
+  const { entities } = useSelector(getContactsSelector);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
 
   useEffect(() => {
     const createContact = newContact => dispatch(addContact(newContact));
     const clear = () => dispatch(clearNewContact());
-    dispatch(getContacts());
-    if (newContact.name !== '' && checkNewContactInState(newContact, contacts)) {
+    if (newContact.name !== '' && checkNewContactInState(newContact, entities)) {
       createContact(newContact);
       clear();
     }
-  }, [contacts, dispatch, newContact]);
+  }, [entities, dispatch, newContact]);
 
   return (
     <>

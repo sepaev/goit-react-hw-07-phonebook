@@ -8,10 +8,10 @@ import { ContactsItem, ContactsList, DeleteButton, NumberSpan, SearchInput } fro
 import { getContactsSelector, getFilterSelector } from '../../redux/selectors';
 
 function Contacts() {
-  const contacts = useSelector(getContactsSelector);
+  const { entities } = useSelector(getContactsSelector);
   const filter = useSelector(getFilterSelector);
-  const filterdContacts = useFilter(contacts, filter);
-  const message = contacts.length ? 'No contacts found.' : 'You have no contacts yet.';
+  const filterdContacts = useFilter(entities, filter);
+  const message = entities.length ? 'No contacts found.' : 'You have no contacts yet.';
   const dispatch = useDispatch();
 
   return (
