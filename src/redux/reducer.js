@@ -19,12 +19,7 @@ export const entities = createReducer([], {
     const contact = action.meta.arg;
     return state.filter(({ id }) => id !== contact.id);
   },
-  [getContacts.fulfilled]: (state, { payload }) => {
-    console.log(state.length);
-    console.log(payload.length);
-
-    return state.length === payload.length ? state : payload;
-  },
+  [getContacts.fulfilled]: (state, { payload }) => (state.length === payload.length ? state : payload),
 });
 
 export const isLoading = createReducer(false, {
@@ -35,16 +30,20 @@ export const isLoading = createReducer(false, {
   [addContact.pending]: () => true,
   [addContact.fulfilled]: () => false,
   [addContact.rejected]: () => false,
+
   [removeContact.pending]: () => true,
   [removeContact.fulfilled]: () => false,
   [removeContact.rejected]: () => false,
 });
 
 export const error = createReducer(null, {
+  //get
   [getContacts.rejected]: (_, action) => action.payload,
   [getContacts.pending]: () => null,
+  //post
   [addContact.rejected]: (_, action) => action.payload,
   [addContact.pending]: () => null,
+  //delete
   [removeContact.rejected]: (_, action) => action.payload,
   [removeContact.pending]: () => null,
 });
