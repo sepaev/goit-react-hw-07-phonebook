@@ -28,7 +28,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 4321\"",
+    "start": "react-scripts start",
+    "startWithServer": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 4321\"",
     "build": "react-scripts build  --public-url /goit-react-hw-07-phonebook",
     "test": "react-scripts test",
     "predeploy": "npm run build",

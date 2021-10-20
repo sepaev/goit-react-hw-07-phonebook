@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { Notify } from 'notiflix';
 
-axios.defaults.baseURL = 'http://localhost:4321';
+// axios.defaults.baseURL = 'http://localhost:4321';
+// add fake json
+axios.defaults.baseURL = 'https://my-json-server.typicode.com/sepaev/goit-react-hw-07-phonebook/';
 
 export async function fetchContacts() {
   return await axios.get('/contacts').then(({ data }) => data);
