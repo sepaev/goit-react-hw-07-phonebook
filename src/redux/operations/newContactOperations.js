@@ -1,10 +1,7 @@
 import { Notify } from 'notiflix';
 import { checkNumberExists, checkNameExists } from '../functions';
-import { getEntitiesSelector, getNewContactSelector } from '../selectors';
 ///////////////////////
-const checkNewContactInState = state => {
-  const newContact = getNewContactSelector(state);
-  const contacts = getEntitiesSelector(state);
+const checkNewContactInState = (newContact, contacts) => {
   const check = checkNewContact(newContact, contacts);
   if (!check.result) {
     if (check.message) Notify.failure(check.message);

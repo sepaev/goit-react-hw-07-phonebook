@@ -5,13 +5,13 @@ import { clearNewContact } from './redux/actions/newContacts_actions';
 import checkNewContactInState from './redux/operations/newContactOperations';
 import { useEffect } from 'react';
 import { getContacts, addContact } from './redux/operations/contactsOperations';
-import { getNewContactSelector, getAllStateSelector } from './redux/selectors';
+import { getNewContactSelector, getEntitiesSelector } from './redux/selectors';
 
 Notify.init({ position: 'center-top' });
 
 function App() {
   const newContact = useSelector(getNewContactSelector);
-  const state = useSelector(getAllStateSelector);
+  const contacts = useSelector(getEntitiesSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,13 +19,11 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    const createContact = newContact => dispatch(addContact(newContact));
-    const clear = () => dispatch(clearNewContact());
-    if (newContact.name !== '' && checkNewContactInState(state)) {
-      createContact(newContact);
-      clear();
+    if (newContact.newName && checkNewContactInState(newContact, contacts)) {
+      dispatch(addContact(newContact));
+      dispatch(clearNewContact());
     }
-  }, [state, dispatch, newContact]);
+  }, [contacts, dispatch, newContact]);
 
   return (
     <>
